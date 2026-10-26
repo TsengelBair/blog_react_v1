@@ -4,6 +4,7 @@ import "./css/styles.css"
 import { CATEGORY_SLUGS } from "./categories";
 
 import Header from "./Components/Header";
+import ArticlePreview from "./Components/ArticlePreview";
 
 /*
   activeCategory - текущая активная категория (получаем из хэдера)
@@ -13,9 +14,22 @@ import Header from "./Components/Header";
 */
 
 function App() {
+  const [articlesPreviewData, setArticlesPreviewData] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(null);
   const [currentSrc, setCurrentSrc] = useState(null);
 
+  useEffect(() => {
+    fetch("/data/preview_data.json")
+    .then((res) => {
+      if (!res.ok) throw new Error("Не удалось загрузить статьи");
+      return res.json();
+    })
+    .then(setArticlesPreviewData)
+    .catch((err) => setError(err.message))
+    .finally(setLoading(false));
+  }, []);
   /*
     Подписываемся на popstate, чтобы при навигации браузера («назад/вперёд») синхронизировать состояние (currentSrc, activeCategory) с URL:
       1) получаем текущий URL (полученный после перемещения)
@@ -66,14 +80,73 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  return (
-    <div className="App">
+  const openArticle = (src) => {
+    console.log("Открытие статьи");
+  }
+
+  if (loading) {
+    return (
+      <div className="App">
         <div className="container">
             <Header
               activeCategory={activeCategory}
               onCategoryClick={toggleCategory}
             />
+            <p className="status">Загрузка…</p>
         </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="App">
+        <div className="container">
+            <Header
+              activeCategory={activeCategory}
+              onCategoryClick={toggleCategory}
+            />
+            <p className="status status--error">{error}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (currentSrc !== null) {
+    return (
+      <div className="App">
+        <div className="container">
+            <Header
+              activeCategory={activeCategory}
+              onCategoryClick={toggleCategory}
+            />
+            <p>TODO::полноэкранная статья</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="App">
+      <div className="container">
+        <Header
+          activeCategory={activeCategory}
+          onCategoryClick={toggleCategory}
+        />
+        <main className="articles">
+          {articlesPreviewData.map((a) => (
+            <ArticlePreview
+              key={a.id}
+              title={a.title}
+              date={a.date}
+              image={a.image}
+              text={a.text}
+              src={a.contentFile}
+              onOpen={openArticle}
+            />
+          ))}
+        </main>
+      </div>
     </div>
   );
 }
