@@ -73,9 +73,7 @@ function App() {
   const toggleCategory = (slug) => {
     const next = activeCategory === slug ? null : slug;
     setActiveCategory(next);
-
     setCurrentSrc(null);
-
     window.history.pushState({}, "", next ? `/${next}` : "/");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -126,6 +124,10 @@ function App() {
     );
   }
 
+  const filtered = activeCategory 
+  ? articlesPreviewData.filter((a) => a.categories.includes(activeCategory))
+  : articlesPreviewData;
+
   return (
     <div className="App">
       <div className="container">
@@ -134,7 +136,7 @@ function App() {
           onCategoryClick={toggleCategory}
         />
         <main className="articles">
-          {articlesPreviewData.map((a) => (
+          {filtered.map((a) => (
             <ArticlePreview
               key={a.id}
               title={a.title}
