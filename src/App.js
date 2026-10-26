@@ -60,11 +60,13 @@ function App() {
       if (categoryMatch && CATEGORY_SLUGS.includes(categoryMatch[1])) {
         setCurrentSrc(null);                         
         setActiveCategory(categoryMatch[1]);
-        return;
-      } 
+      } else {
+        setCurrentSrc(null);
+        setActiveCategory(null);
+      }
 
-      setCurrentSrc(null);
-      setActiveCategory(null);
+      const p = parseInt(params.get("page"), 10);
+      setPage(p > 0 ? p : 1);
     }
 
     window.addEventListener("popstate", onPop);
@@ -87,7 +89,6 @@ function App() {
     console.log("Открытие статьи");
   }
 
-  // добавить обработку в onPop!!!
   const goToPage = (n) => {
     setPage(n);
 
