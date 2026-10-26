@@ -1,7 +1,7 @@
 const Pagination = ({ page, totalPages, onChange }) => {
     if (totalPages <= 1) return;
 
-    const pages = Array.from({ legnth: totalPages }, (_, i) => i + 1);
+    const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
     return (
         <nav className="pagination" aria-label="Страницы">

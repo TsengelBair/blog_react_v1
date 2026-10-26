@@ -5,6 +5,9 @@ import { CATEGORY_SLUGS } from "./categories";
 
 import Header from "./Components/Header";
 import ArticlePreview from "./Components/ArticlePreview";
+import Pagination from "./Components/Pagination";
+
+const PER_PAGE = 10;
 
 /*
   activeCategory - текущая активная категория (получаем из хэдера)
@@ -19,6 +22,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(null);
   const [currentSrc, setCurrentSrc] = useState(null);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     fetch("/data/preview_data.json")
@@ -74,12 +78,17 @@ function App() {
     const next = activeCategory === slug ? null : slug;
     setActiveCategory(next);
     setCurrentSrc(null);
+    setPage(1);
     window.history.pushState({}, "", next ? `/${next}` : "/");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   const openArticle = (src) => {
     console.log("Открытие статьи");
+  }
+
+  const goToPage = (n) => {
+    console.log(`Переход на страницу ${n}`)
   }
 
   if (loading) {
@@ -124,9 +133,16 @@ function App() {
     );
   }
 
+  /* оставляем только тематические статьи (includes, т.к. одна статья может относиться к нескольким темам) */
   const filtered = activeCategory 
   ? articlesPreviewData.filter((a) => a.categories.includes(activeCategory))
   : articlesPreviewData;
+
+  /* вычисляем кол-во страниц и берем срез, чтобы отобразить нужные статьи в зависимости от выбранной страницы */
+  const totalPages = Math.ceil(filtered.length / PER_PAGE);
+  const start = (page - 1) * PER_PAGE;
+  const end = start + PER_PAGE;
+  const visible = filtered.slice(start, end);
 
   return (
     <div className="App">
@@ -136,7 +152,7 @@ function App() {
           onCategoryClick={toggleCategory}
         />
         <main className="articles">
-          {filtered.map((a) => (
+          {visible.map((a) => (
             <ArticlePreview
               key={a.id}
               title={a.title}
@@ -148,6 +164,11 @@ function App() {
             />
           ))}
         </main>
+        <Pagination 
+          page={page}
+          totalPages={totalPages}
+          onChange={goToPage}
+        />
       </div>
     </div>
   );
