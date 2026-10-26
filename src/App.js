@@ -79,7 +79,7 @@ function App() {
     setActiveCategory(next);
     setCurrentSrc(null);
     setPage(1);
-    window.history.pushState({}, "", next ? `/${next}` : "/");
+    window.history.pushState({}, "", next ? `/${next}` : "/"); // pushState — меняет URL без перезагрузки, добавляет запись в историю
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -87,8 +87,18 @@ function App() {
     console.log("Открытие статьи");
   }
 
+  // добавить обработку в onPop!!!
   const goToPage = (n) => {
-    console.log(`Переход на страницу ${n}`)
+    setPage(n);
+
+    const params = new URLSearchParams();
+    if (n > 1) params.set("page", n);
+
+    const query = params.toString();
+    const base = activeCategory ? `/${activeCategory}` : "/";
+
+    window.history.pushState({}, "", query ? `${base}?${query}` : base);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   if (loading) {
