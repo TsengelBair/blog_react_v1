@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "title": "Простые числа и решето Эратосфена",
+    "categories": ["math", "algorithms"],
+    "date": "20.10.2026",
+    "image": "/img/1.png",
+    "text": "Разбираем решето Эратосфена — классический алгоритм поиска простых чисел. От наивной проверки делителей до оптимизированной версии с O(n log log n).",
+    "contentFile": "/md/math-primes.md"
+  },
+  {
+    "id": 2,
+    "title": "Быстрая сортировка: как не сломать рекурсию",
+    "categories": ["algorithms"],
+    "date": "18.10.2026",
+    "image": "/img/2.png",
+    "text": "Quicksort кажется простым, пока не встретишь худший случай. Разбираем выбор опорного элемента, хвостовую рекурсию и почему random pivot спасает.",
+    "contentFile": "/md/algo-quicksort.md"
+  },
+  {
+    "id": 3,
+    "title": "C++: RAII — владение как принцип",
+    "categories": ["cpp"],
+    "date": "16.10.2026",
+    "image": "/img/3.png",
+    "text": "RAII — не просто «умные указатели». Это философия: ресурс живёт, пока живёт объект. Разбираем на примерах файлов, мьютексов и сокетов.",
+    "contentFile": "/md/cpp-raii.md"
+  },
+  {
+    "id": 4,
+    "title": "Qt: сигналы и слоты без магии",
+    "categories": ["qt", "cpp"],
+    "date": "14.10.2026",
+    "image": "/img/4.png",
+    "text": "Механизм сигналов и слотов — сердце Qt. Как соединять объекты, чем отличаются типы соединений и почему иногда «не работает».",
+    "contentFile": "/md/qt-signals.md"
+  },
+  {
+    "id": 5,
+    "title": "CMake: цели и зависимости",
+    "categories": ["cmake", "cpp"],
+    "date": "12.10.2026",
+    "image": "/img/5.png",
+    "text": "CMakeLists.txt с нуля: цели, зависимости, подключение библиотек. Почему target_link_libraries лучше глобальных переменных.",
+    "contentFile": "/md/cmake-targets.md"
+  },
+  {
+    "id": 6,
+    "title": "Postgres: индексы, которые действительно ускоряют",
+    "categories": ["postgres"],
+    "date": "10.10.2026",
+    "image": "/img/6.png",
+    "text": "B-tree, GIN, BRIN — когда какой индекс выбрать и почему «добавил индекс, а стало медленнее». Разбираем EXPLAIN ANALYZE.",
+    "contentFile": "/md/pg-indexes.md"
+  },
+  {
+    "id": 7,
+    "title": "Git: rebase или merge?",
+    "categories": ["git"],
+    "date": "08.10.2026",
+    "image": "/img/7.png",
+    "text": "Вечный спор. Разбираем, когда rebase делает историю чище, а когда он опасен. Правила безопасности и работа с чужими ветками.",
+    "contentFile": "/md/git-rebase.md"
+  },
+  {
+    "id": 8,
+    "title": "Linux: systemd для тех, кто боится",
+    "categories": ["linux"],
+    "date": "06.10.2026",
+    "image": "/img/8.png",
+    "text": "Юниты, таргеты, journalctl — как управлять сервисами без паники. Пишем свой первый unit-файл и разбираемся, почему сервис не стартует.",
+    "contentFile": "/md/linux-systemd.md"
+  },
+  {
+    "id": 9,
+    "title": "Математика: графы и топологическая сортировка",
+    "categories": ["math", "algorithms"],
+    "date": "04.10.2026",
+    "image": "/img/9.png",
+    "text": "Топологическая сортировка — где она нужна: сборка зависимостей, планировщики, курсы. Разбираем DFS и алгоритм Кана.",
+    "contentFile": "/md/math-graphs.md"
+  },
+  {
+    "id": 10,
+    "title": "Алгоритмы: бинарный поиск по ответу",
+    "categories": ["algorithms", "math"],
+    "date": "02.10.2026",
+    "image": "/img/10.png",
+    "text": "Бинарный поиск не только в массиве. «Поиск по ответу» — когда ответ монотонен, его можно найти за O(log n). Примеры задач.",
+    "contentFile": "/md/algo-binary-answer.md"
+  },
+  {
+    "id": 11,
+    "title": "C++: move-семантика простыми словами",
+    "categories": ["cpp"],
+    "date": "30.09.2026",
+    "image": "/img/11.png",
+    "text": "std::move не двигает, а лишь приводит к rvalue. Разбираем, как работает перемещение, и почему это не магия, а оптимизация.",
+    "contentFile": "/md/cpp-move.md"
+  },
+  {
+    "id": 12,
+    "title": "Qt: модель/представление без боли",
+    "categories": ["qt", "cpp"],
+    "date": "28.09.2026",
+    "image": "/img/12.png",
+    "text": "QAbstractItemModel кажется монстром, но всё проще. Пишем свою модель для таблицы и не тормозим на больших данных.",
+    "contentFile": "/md/qt-model-view.md"
+  },
+  {
+    "id": 13,
+    "title": "CMake: FetchContent и современные зависимости",
+    "categories": ["cmake", "cpp"],
+    "date": "26.09.2026",
+    "image": "/img/13.png",
+    "text": "Как подключать сторонние библиотеки без git submodules. FetchContent, CPM.cmake и когда лучше использовать пакетный менеджер.",
+    "contentFile": "/md/cmake-fetchcontent.md"
+  },
+  {
+    "id": 14,
+    "title": "Postgres: транзакции и уровни изоляции",
+    "categories": ["postgres"],
+    "date": "24.09.2026",
+    "image": "/img/14.png",
+    "text": "READ COMMITTED, REPEATABLE READ, SERIALIZABLE — чем отличаются и когда ловить serialization failure. Разбираем MVCC.",
+    "contentFile": "/md/pg-transactions.md"
+  },
+  {
+    "id": 15,
+    "title": "Git: как отменить всё что угодно",
+    "categories": ["git"],
+    "date": "22.09.2026",
+    "image": "/img/15.png",
+    "text": "reset, revert, restore, checkout — что и когда использовать. Как откатить коммит и не потерять работу навсегда.",
+    "contentFile": "/md/git-undo.md"
+  },
+  {
+    "id": 16,
+    "title": "Linux: bash-скрипты, которые не стыдно показать",
+    "categories": ["linux"],
+    "date": "20.09.2026",
+    "image": "/img/16.png",
+    "text": "set -euo pipefail, обработка аргументов, функции, логирование. Пишем надёжные скрипты, которые не падают на первой ошибке.",
+    "contentFile": "/md/linux-bash.md"
+  }
+]
