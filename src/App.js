@@ -6,6 +6,7 @@ import { CATEGORY_SLUGS } from "./categories";
 import Header from "./Components/Header";
 import ArticlePreview from "./Components/ArticlePreview";
 import Pagination from "./Components/Pagination";
+import Article from "./Components/Article";
 
 const PER_PAGE = 10;
 
@@ -48,7 +49,7 @@ function App() {
 
       const articleMatch = path.match(/^\/articles\/([^/]+)$/);
       if (articleMatch) {
-        setCurrentSrc(`/md/${articleMatch[1]}.md`);
+        setCurrentSrc(`/articles/${articleMatch[1]}.md`);
         
         const cat = params.get("category");
         setActiveCategory(cat && CATEGORY_SLUGS.includes(cat) ? cat : null);
@@ -86,7 +87,19 @@ function App() {
   }
 
   const openArticle = (src) => {
-    console.log("Открытие статьи");
+    const slug = src.replace(/^\/articles\//, "").replace(/\.md$/, ""); // из src ("/articles/loop_tmp.md") получить slug ("loop_tmp") — для URL.
+    setCurrentSrc(src);                                           // "/articles/loop_tmp.md"
+
+    const params = new URLSearchParams();
+    if (activeCategory) params.set("category", activeCategory);
+
+    const query = params.toString();
+    window.history.pushState(
+      {},
+      "",
+      query ? `/articles/${slug}?${query}` : `/articles/${slug}`
+    );
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   const goToPage = (n) => {
@@ -138,7 +151,7 @@ function App() {
               activeCategory={activeCategory}
               onCategoryClick={toggleCategory}
             />
-            <p>TODO::полноэкранная статья</p>
+            <Article src={currentSrc}/>
         </div>
       </div>
     );
