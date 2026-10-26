@@ -142,5 +142,59 @@
     "image": "/img/16.png",
     "text": "set -euo pipefail, обработка аргументов, функции, логирование. Пишем надёжные скрипты, которые не падают на первой ошибке.",
     "contentFile": "/md/linux-bash.md"
+  },
+    {
+    "id": 17,
+    "title": "C++: идиома PIMPL — зачем прятать реализацию",
+    "categories": ["cpp"],
+    "date": "18.09.2026",
+    "image": "/img/17.png",
+    "text": "PIMPL (pointer to implementation) скрывает детали класса в .cpp. Разбираем, как это уменьшает зависимости, ускоряет сборку и почему это не «оверинжиниринг».",
+    "contentFile": "/md/cpp-pimpl.md"
+  },
+  {
+    "id": 18,
+    "title": "C++: constexpr — вычисления на этапе компиляции",
+    "categories": ["cpp"],
+    "date": "16.09.2026",
+    "image": "/img/18.png",
+    "text": "constexpr переносит вычисления в компилятор. Разбираем, что можно и нельзя, как работает if constexpr и чем это отличается от const.",
+    "contentFile": "/md/cpp-constexpr.md"
+  },
+  {
+    "id": 19,
+    "title": "Qt: QThread и moveToThread — правильный паттерн",
+    "categories": ["qt", "cpp"],
+    "date": "14.09.2026",
+    "image": "/img/19.png",
+    "text": "QThread наследовать — плохо, moveToThread — правильно. Разбираем worker-object, сигналы между потоками и типичные ошибки с GUI.",
+    "contentFile": "/md/qt-qthread.md"
+  },
+  {
+    "id": 20,
+    "title": "Qt: QML и C++ — как подружить",
+    "categories": ["qt", "cpp"],
+    "date": "12.09.2026",
+    "image": "/img/20.png",
+    "text": "Q_PROPERTY, Q_INVOKABLE, сигналы в QML — как связать C++-логику с декларативным интерфейсом. Разбираем модель, контекст и типичные ошибки.",
+    "contentFile": "/md/qt-qml-cpp.md"
+  },
+  {
+    "id": 21,
+    "title": "CMake: тесты с CTest и GoogleTest",
+    "categories": ["cmake", "cpp"],
+    "date": "10.09.2026",
+    "image": "/img/21.png",
+    "text": "Как встроить тесты в сборку CMake: CTest, GoogleTest, Catch2. Настраиваем CI, чтобы тесты запускались на каждый коммит.",
+    "contentFile": "/md/cmake-testing.md"
+  },
+  {
+    "id": 22,
+    "title": "CMake: профилирование и ускорение сборки",
+    "categories": ["cmake", "cpp"],
+    "date": "08.09.2026",
+    "image": "/img/22.png",
+    "text": "Почему сборка занимает 10 минут и как это исправить: ccache, unity build, предкомпилированные заголовки. Замеряем до и после.",
+    "contentFile": "/md/cmake-build-speed.md"
   }
 ]
