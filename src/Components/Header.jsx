@@ -7,22 +7,37 @@
     onSearchClicked - коллбэк для обработки нажатия на кнопку Найти, чтобы отобразить все подходящие статьи в App.js
 */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CATEGORIES } from "../categories";
 
 const Header = ({ activeCategory, onCategoryClick, articles, onSearchSelect, onSearchClicked }) => {
-  // searchQuery - текст в поле ввода
   const [searchQuery, setSearchQuery] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const searchWrapRef = useRef(null);
+
+  useEffect(() => {
+    const onMouseDown = (e) => {
+      if (searchWrapRef.current && !searchWrapRef.current.contains(e.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", onMouseDown);
+    return () => document.removeEventListener("mousedown", onMouseDown); 
+  }, []);
 
   const query = searchQuery.trim().toLowerCase();
   const matches = query
-    ? articles.filter((a) => a.title.toLowerCase().includes(query)).slice(0, 8) // TODO:: добавить слайдер (когда статей станет много грузить больше 8)
+    ? articles.filter((a) => a.title.toLowerCase().includes(query)).slice(0, 8)
     : [];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearchClicked(searchQuery.trim()); 
+    onSearchClicked(searchQuery.trim());
+    setShowDropdown(false);
   };
+
+  const isDropdownVisible = showDropdown && query;
 
   return (
     <header className="header">
@@ -34,17 +49,21 @@ const Header = ({ activeCategory, onCategoryClick, articles, onSearchSelect, onS
 
         <search className="header__search">
           <form className="header__search-form" onSubmit={handleSubmit}>
-            <div className="header__search-wrap">
+            <div className="header__search-wrap" ref={searchWrapRef}>   {/* ← ref здесь */}
               <input
                 className="header__search-input"
                 type="search"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setShowDropdown(true);
+                }}
+                onFocus={() => setShowDropdown(true)}
                 placeholder="Поиск статей…"
                 aria-label="Поиск статей"
               />
 
-              {query && (
+              {isDropdownVisible && (
                 <ul className="search-dropdown">
                   {matches.length === 0 ? (
                     <li className="search-dropdown__empty">Ничего не найдено</li>
@@ -56,6 +75,7 @@ const Header = ({ activeCategory, onCategoryClick, articles, onSearchSelect, onS
                           className="search-dropdown__item"
                           onClick={() => {
                             setSearchQuery("");
+                            setShowDropdown(false);
                             onSearchSelect(a.contentFile);
                           }}
                         >
