@@ -11,6 +11,7 @@ import { useState } from "react";
 import { CATEGORIES } from "../categories";
 
 const Header = ({ activeCategory, onCategoryClick, articles, onSearchSelect, onSearchClicked }) => {
+  // searchQuery - текст в поле ввода
   const [searchQuery, setSearchQuery] = useState("");
 
   const query = searchQuery.trim().toLowerCase();

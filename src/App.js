@@ -26,6 +26,7 @@ function App() {
   const [activeCategory, setActiveCategory] = useState(null);
   const [currentSrc, setCurrentSrc] = useState(null);
   const [page, setPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState(""); // запрос, по которому отфильтрован список (если есть)
 
   useEffect(() => {
     fetch("/data/preview_data.json")
@@ -117,14 +118,24 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  const onSearchClicked = (value) => {
+    setSearchQuery(value);
+    setPage(1);  
+  }
+
+  const headerProps = {
+    activeCategory,
+    onCategoryClick: toggleCategory,
+    articles: articlesPreviewData,
+    onSearchSelect: openArticle,
+    onSearchClicked,
+  };
+
   if (loading) {
     return (
       <div className="App">
         <div className="container">
-            <Header
-              activeCategory={activeCategory}
-              onCategoryClick={toggleCategory}
-            />
+            <Header {...headerProps} />
             <p className="status">Загрузка…</p>
         </div>
           <Footer />
@@ -136,10 +147,7 @@ function App() {
     return (
       <div className="App">
         <div className="container">
-            <Header
-              activeCategory={activeCategory}
-              onCategoryClick={toggleCategory}
-            />
+            <Header {...headerProps} />
             <p className="status status--error">{error}</p>
         </div>
             <Footer />
@@ -151,10 +159,7 @@ function App() {
     return (
       <div className="App">
         <div className="container">
-            <Header
-              activeCategory={activeCategory}
-              onCategoryClick={toggleCategory}
-            />
+            <Header {...headerProps} />
             <Article src={currentSrc}/>
         </div>
         <Footer />
@@ -163,10 +168,19 @@ function App() {
     );
   }
 
+  const query = searchQuery.trim().toLowerCase();
+  const searched = query
+    ? articlesPreviewData.filter(
+        (a) =>
+          a.title.toLowerCase().includes(query) ||
+          a.text.toLowerCase().includes(query)
+      )
+    : articlesPreviewData;
+
   /* оставляем только тематические статьи (includes, т.к. одна статья может относиться к нескольким темам) */
   const filtered = activeCategory 
-  ? articlesPreviewData.filter((a) => a.categories.includes(activeCategory))
-  : articlesPreviewData;
+  ? searched.filter((a) => a.categories.includes(activeCategory))
+  : searched;
 
   /* вычисляем кол-во страниц и берем срез, чтобы отобразить нужные статьи в зависимости от выбранной страницы */
   const totalPages = Math.ceil(filtered.length / PER_PAGE);
@@ -177,10 +191,7 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <Header
-          activeCategory={activeCategory}
-          onCategoryClick={toggleCategory}
-        />
+        <Header {...headerProps} />
         <main className="articles">
           {visible.map((a) => (
             <ArticlePreview
