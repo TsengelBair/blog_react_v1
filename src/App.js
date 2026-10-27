@@ -7,6 +7,7 @@ import Header from "./Components/Header";
 import ArticlePreview from "./Components/ArticlePreview";
 import Pagination from "./Components/Pagination";
 import Article from "./Components/Article";
+import Footer from "./Components/Footer";
 
 const PER_PAGE = 10;
 
@@ -125,6 +126,7 @@ function App() {
             />
             <p className="status">Загрузка…</p>
         </div>
+          <Footer />
       </div>
     );
   }
@@ -139,6 +141,7 @@ function App() {
             />
             <p className="status status--error">{error}</p>
         </div>
+            <Footer />
       </div>
     );
   }
@@ -153,6 +156,7 @@ function App() {
             />
             <Article src={currentSrc}/>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -194,6 +198,7 @@ function App() {
           onChange={goToPage}
         />
       </div>
+      <Footer />
     </div>
   );
 }
