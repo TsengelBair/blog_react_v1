@@ -8,6 +8,7 @@ import ArticlePreview from "./Components/ArticlePreview";
 import Pagination from "./Components/Pagination";
 import Article from "./Components/Article";
 import Footer from "./Components/Footer";
+import ScrollToTop from "./Components/ScrollToTop";
 
 const PER_PAGE = 10;
 
@@ -157,6 +158,7 @@ function App() {
             <Article src={currentSrc}/>
         </div>
         <Footer />
+        <ScrollToTop/>
       </div>
     );
   }
@@ -199,6 +201,7 @@ function App() {
         />
       </div>
       <Footer />
+      <ScrollToTop/>
     </div>
   );
 }
