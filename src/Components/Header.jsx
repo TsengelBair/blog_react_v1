@@ -2,7 +2,7 @@
     Отображаем список тем, которые берем из categories.js
     Через пропсы передаем активную категорию и коллбэк для обработки клика по категории (обработаем в App.js)
     Переданной активной категории просто добавляем css класс nav__link--active, которые добавит в ui выделение
-    Передаем articles (данные превью), т.к. поиск осуществляем по заголовку и краткому описанию статьи
+    Передаем articles (данные превью), т.к. поиск осуществляем по заголовку статьи (а все заголовки лежат в переданных articles)
     onSearchSelect - коллбэк для обработки нажатия на выбранную статью, чтобы открыть статью
     onSearchClicked - коллбэк для обработки нажатия на кнопку Найти, чтобы отобразить все подходящие статьи в App.js
 */
@@ -10,13 +10,7 @@
 import { useState } from "react";
 import { CATEGORIES } from "../categories";
 
-const Header = ({
-  activeCategory,
-  onCategoryClick,
-  articles,
-  onSearchSelect,
-  onSearchClicked,
-}) => {
+const Header = ({ activeCategory, onCategoryClick, articles, onSearchSelect, onSearchClicked }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const query = searchQuery.trim().toLowerCase();
