@@ -169,6 +169,7 @@ function App() {
   }
 
   const query = searchQuery.trim().toLowerCase();
+  // ключевое слово ищем и в заголовке и в кратком описании 
   const searched = query
     ? articlesPreviewData.filter(
         (a) =>
@@ -177,12 +178,12 @@ function App() {
       )
     : articlesPreviewData;
 
-  /* оставляем только тематические статьи (includes, т.к. одна статья может относиться к нескольким темам) */
+  // оставляем только тематические статьи (includes, т.к. одна статья может относиться к нескольким темам)
   const filtered = activeCategory 
   ? searched.filter((a) => a.categories.includes(activeCategory))
   : searched;
 
-  /* вычисляем кол-во страниц и берем срез, чтобы отобразить нужные статьи в зависимости от выбранной страницы */
+  // вычисляем кол-во страниц и берем срез, чтобы отобразить нужные статьи в зависимости от выбранной страницы 
   const totalPages = Math.ceil(filtered.length / PER_PAGE);
   const start = (page - 1) * PER_PAGE;
   const end = start + PER_PAGE;
