@@ -49,14 +49,15 @@ function App() {
       const path = window.location.pathname;                      // пример: /articles/math-primes
       // категория (если есть, если нет то ничего)
       const params = new URLSearchParams(window.location.search); // пример: category=math
+      // поисковый запрос 
+      const q = params.get("q") ?? ("");
+      setSearchQuery(q);
 
       const articleMatch = path.match(/^\/articles\/([^/]+)$/);
       if (articleMatch) {
         setCurrentSrc(`/articles/${articleMatch[1]}.md`);
-        
         const cat = params.get("category");
         setActiveCategory(cat && CATEGORY_SLUGS.includes(cat) ? cat : null);
-
         return;
       }
 
