@@ -10,8 +10,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CATEGORIES } from "../categories";
 
-const Header = ({ activeCategory, onCategoryClick, articles, onSearchSelect, onSearchClicked }) => {
-  const [searchQuery, setSearchQuery] = useState("");
+const Header = ({ activeCategory, onCategoryClick, articles, onSearchSelect, onSearchClicked, searchQuery, onSearchChange }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   /*
     searchWrapRef - переменная, с одним полем current, которое указывает на реальный div в DOM
@@ -60,7 +59,7 @@ const Header = ({ activeCategory, onCategoryClick, articles, onSearchSelect, onS
                 type="search"
                 value={searchQuery}
                 onChange={(e) => {
-                  setSearchQuery(e.target.value);
+                  onSearchChange(e.target.value);
                   setShowDropdown(true);
                 }}
                 onFocus={() => setShowDropdown(true)}
@@ -79,7 +78,7 @@ const Header = ({ activeCategory, onCategoryClick, articles, onSearchSelect, onS
                           type="button"
                           className="search-dropdown__item"
                           onClick={() => {
-                            setSearchQuery("");
+                            onSearchChange("");
                             setShowDropdown(false);
                             onSearchSelect(a.contentFile);
                           }}

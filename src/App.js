@@ -139,6 +139,8 @@ function App() {
     articles: articlesPreviewData,
     onSearchSelect: openArticle,
     onSearchClicked,
+    searchQuery,
+    onSearchChange: setSearchQuery,
   };
 
   if (loading) {
