@@ -119,8 +119,17 @@ function App() {
   }
 
   const onSearchClicked = (value) => {
-    setSearchQuery(value);
+    const q = value.trim();
+    setSearchQuery(q);
     setPage(1);  
+
+    const params = new URLSearchParams();
+    if (activeCategory) params.set("category", activeCategory);
+    if (q) params.set("q", q);
+
+    const query = params.toString();
+    const base = activeCategory ? `/${activeCategory}` : "/";
+    window.history.pushState({}, "", query ? `${base}?${query}` : base);
   }
 
   const headerProps = {
