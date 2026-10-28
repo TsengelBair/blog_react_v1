@@ -13,6 +13,11 @@ import { CATEGORIES } from "../categories";
 const Header = ({ activeCategory, onCategoryClick, articles, onSearchSelect, onSearchClicked }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+  /*
+    searchWrapRef - переменная, с одним полем current, которое указывает на реальный div в DOM
+    сам div - это поле поиска с выпадающим списком и для его скрытия в ui необходимо отслеживать событие клика
+    при клике вне этого div скрываем выпадающий список
+  */
   const searchWrapRef = useRef(null);
 
   useEffect(() => {
@@ -28,7 +33,7 @@ const Header = ({ activeCategory, onCategoryClick, articles, onSearchSelect, onS
 
   const query = searchQuery.trim().toLowerCase();
   const matches = query
-    ? articles.filter((a) => a.title.toLowerCase().includes(query)).slice(0, 8)
+    ? articles.filter((a) => a.title.toLowerCase().includes(query))
     : [];
 
   const handleSubmit = (e) => {
@@ -49,7 +54,7 @@ const Header = ({ activeCategory, onCategoryClick, articles, onSearchSelect, onS
 
         <search className="header__search">
           <form className="header__search-form" onSubmit={handleSubmit}>
-            <div className="header__search-wrap" ref={searchWrapRef}>   {/* ← ref здесь */}
+            <div className="header__search-wrap" ref={searchWrapRef}> 
               <input
                 className="header__search-input"
                 type="search"
