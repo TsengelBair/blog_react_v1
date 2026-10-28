@@ -199,23 +199,30 @@ function App() {
   const end = start + PER_PAGE;
   const visible = filtered.slice(start, end);
 
+  // пусто именно из-за фильтров (поиск / категория), а не потому, что данных нет
+  const nothingFound = filtered.length === 0;
+
   return (
     <div className="App">
       <div className="container">
         <Header {...headerProps} />
         <main className="articles">
-          {visible.map((a) => (
-            <ArticlePreview
-              key={a.id}
-              title={a.title}
-              date={a.date}
-              image={a.image}
-              text={a.text}
-              src={a.contentFile}
-              onOpen={openArticle}
-            />
-          ))}
-        </main>
+          {nothingFound ? (
+            <p className="articles__empty">Ничего не найдено</p>
+          ) : (
+            visible.map((a) => (
+              <ArticlePreview
+                key={a.id}
+                title={a.title}
+                date={a.date}
+                image={a.image}
+                text={a.text}
+                src={a.contentFile}
+                onOpen={openArticle}
+              />
+            ))
+          )}
+      </main>
         <Pagination 
           page={page}
           totalPages={totalPages}

@@ -628,3 +628,23 @@ body,
   font-size: 0.9rem;
   color: #8a94a8;
 }
+
+.articles__empty {
+  /* растянуть на всю ширину, если .articles — grid */
+  grid-column: 1 / -1;
+
+  /* центрирование текста по горизонтали */
+  text-align: center;
+
+  /* вертикальные отступы, чтобы текст не прилипал к краям */
+  padding: 64px 16px;
+  margin: 0;
+
+  /* типографика */
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: #6b7280;
+
+  /* если .articles — flex, это отцентрирует и по вертикали при необходимости */
+  align-self: center;
+}
