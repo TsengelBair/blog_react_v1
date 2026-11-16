@@ -11,7 +11,7 @@ const Footer = () => {
 
           <nav className="footer__nav" aria-label="Навигация в подвале">
             <ul className="footer__list">
-              <li>
+              {/* <li>
                 <a className="footer__link" href="/about">Обо мне</a>
               </li>
               <li>
@@ -19,11 +19,11 @@ const Footer = () => {
               </li>
               <li>
                 <a className="footer__link" href="/rss.xml">RSS</a>
-              </li>
+              </li> */}
               <li>
                 <a
                   className="footer__link"
-                  href="https://github.com/"
+                  href="https://github.com/TsengelBair"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
