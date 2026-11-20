@@ -649,3 +649,89 @@ body,
   /* если .articles — flex, это отцентрирует и по вертикали при необходимости */
   align-self: center;
 }
+
+/* --- Базовые стили (Десктоп, ширина > 579px) --- */
+.header__search {
+  flex: 0 1 360px; /* На десктопе — компактный блок */
+  min-width: 0;
+}
+
+.header__search-form {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.header__search-wrap {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.header__search-input {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #273453;
+  background-color: #ffffff;
+  border: 1px solid #d0d7e6;
+  border-radius: 4px;
+  transition: border-color 0.2s;
+}
+
+.header__search-btn {
+  flex: 0 0 auto;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: #273453;
+  background-color: #ffffff;
+  border: 1px solid #d0d7e6;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* --- Мобильная логика (ширина < 579px) --- */
+@media (max-width: 578px) {
+  /* 1. Заставляем весь блок поиска растянуться на 100% ширины контейнера */
+  .header__search {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  /* 2. Форма остается flex-row (в одну строку), растягиваемся на 100% */
+  .header__search-form {
+    width: 100%;
+  }
+
+  /* 3. Обертка занимает всё место, кроме ширины кнопки */
+  .header__search-wrap {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  /* 
+    4. Инпут растягивается, но оставляет место для кнопки.
+    110px — это примерная ширина вашей кнопки (padding + text).
+    Если кнопка "Найти" станет шире (например, на длинных словах), увеличьте это значение.
+  */
+  .header__search-input {
+    width: calc(100% - 5px);
+    /* Для поддержки старых браузеров можно добавить -webkit-calc */
+    width: -webkit-calc(100% - 5px);
+  }
+
+  /* 5. Кнопка сохраняет свои размеры и не сжимается */
+  .header__search-btn {
+    flex: 0 0 auto;
+    /* Ширина кнопки подстроится под текст, если вы не задавали фикс width */
+  }
+}
+
+/* --- Остальные ваши стили (nav и т.д.) --- */
+/* ... остаются без изменений ... */
