@@ -10,7 +10,7 @@ import Article from "./Components/Article";
 import Footer from "./Components/Footer";
 import ScrollToTop from "./Components/ScrollToTop";
 
-const PER_PAGE = 10;
+const PER_PAGE = 5;
 
 /*
   activeCategory - текущая активная категория (получаем из хэдера)
